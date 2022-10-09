@@ -9,14 +9,14 @@
 class TurboFailureApp < Devise::FailureApp
   def respond
     if request_format == :turbo_stream
-      redirect
+      :redirect
     else
       super
     end
   end
 
   def skip_format?
-    %w(html turbo_stream */*).include? request_format.to_s
+    %w[html turbo_stream].include? request_format.to_s
   end
 end
 
@@ -28,9 +28,9 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = 'f1d98e0e8e27f6237a337a86be6778ca7e529072659316d0a9e8b13893c8bbde9e3da39b67a5eeca872a099c153c958295f34aef715d4c1c2367bf6ad2d45f91'
+  # config.secret_key = '730f0fa4c9fd7bb3b31cd1b248c44b43ae615c098515a43bf12b775e56ab1c147bb60d8e0e75685c0529b398870f1bbc5478459292cc0f23937281f14d0c5c0d'
 
-  config.parent_controller = "TurboDeviseController"
+  config.parent_controller = 'TurboDeviseController'
   config.navigational_formats = ['*/*', :html, :turbo_stream]
   config.warden do |manager|
     manager.failure_app = TurboFailureApp
@@ -146,7 +146,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = 'f86024e4ddf13a9c7534b26e90f500f38165ecb595c56237a9e47ee90dafc7ed6b7beaa8dd2e289dbdee9ec6d79781f113aa604dd67cc06a02243c7b85e6fd34'
+  # config.pepper = '33598df140230d95fd70e00cb956799b702b63fda66c31998fe5c8ccc38754c33691d90f0b4a252568c2b4a0a19467bd4d1958618883a8432e4edb4278f2ff6a'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
